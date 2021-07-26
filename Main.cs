@@ -36,8 +36,8 @@ namespace StopRightThere
             try
             {
                 Game.LogTrivial("[StopRightThere] [initialization] INFO: Attempt to read settings");
-                try { Main.key1 = (Keys)kc.ConvertFromString(Reader.ReadString("Keybindings", "Pullover Key", "P")); successfullySetup[0] = true; } catch { Game.LogTrivial($"[StopRightThere] [initialization] WARNING: Couldn't read RespondToAiCAsSecondary_Key"); }
-                try { Main.key2 = (Keys)kc.ConvertFromString(Reader.ReadString("Keybindings", "ModifierKey", "LControlKey")); successfullySetup[1] = true; } catch { Game.LogTrivial($"[StopRightThere] [initialization] WARNING: Couldn't read RespondToAiCAsSecondary_ModifierKey"); }
+                try { Main.key1 = (Keys)kc.ConvertFromString(Reader.ReadString("Keybindings", "PulloverKey", "P")); successfullySetup[0] = true; } catch { Game.LogTrivial($"[StopRightThere] [initialization] WARNING: Couldn't read PulloverKey"); }
+                try { Main.key2 = (Keys)kc.ConvertFromString(Reader.ReadString("Keybindings", "ModifierKey", "LControlKey")); successfullySetup[1] = true; } catch { Game.LogTrivial($"[StopRightThere] [initialization] WARNING: Couldn't read ModifierKey"); }
                 bool allOK = true;
                 foreach (bool ok in successfullySetup) { if (ok == false) allOK = false; }
 
