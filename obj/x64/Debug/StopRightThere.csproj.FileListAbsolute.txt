@@ -1,0 +1,11 @@
+C:\Users\John\Desktop\StopRightThere\StopRightThere\obj\x64\Debug\StopRightThere.csproj.CoreCompileInputs.cache
+C:\Users\John\Desktop\StopRightThere\StopRightThere\bin\x64\Debug\StopRightThere.dll
+C:\Users\John\Desktop\StopRightThere\StopRightThere\bin\x64\Debug\StopRightThere.pdb
+C:\Users\John\Desktop\StopRightThere\StopRightThere\bin\x64\Debug\LSPD First Response.dll
+C:\Users\John\Desktop\StopRightThere\StopRightThere\bin\x64\Debug\RagePluginHookSDK.dll
+C:\Users\John\Desktop\StopRightThere\StopRightThere\bin\x64\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\John\Desktop\StopRightThere\StopRightThere\bin\x64\Debug\RagePluginHookSDK.xml
+C:\Users\John\Desktop\StopRightThere\StopRightThere\obj\x64\Debug\StopRightThere.csproj.AssemblyReference.cache
+C:\Users\John\Desktop\StopRightThere\StopRightThere\obj\x64\Debug\StopRightThere.csproj.CopyComplete
+C:\Users\John\Desktop\StopRightThere\StopRightThere\obj\x64\Debug\StopRightThere.dll
+C:\Users\John\Desktop\StopRightThere\StopRightThere\obj\x64\Debug\StopRightThere.pdb
