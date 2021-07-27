@@ -32,7 +32,7 @@ namespace StopRightThere
             try
             {
                 Game.LogTrivial("[StopRightThere] [initialization] INFO: Attempt to read settings");
-                try { Main.key1 = (Keys)kc.ConvertFromString(Reader.ReadString("Keybindings", "PulloverKey", "P")); successfullySetup[0] = true; } catch { Game.LogTrivial($"[StopRightThere] [initialization] WARNING: Couldn't read PulloverKey"); }
+                try { Main.key1 = (Keys)kc.ConvertFromString(Reader.ReadString("Keybindings", "PulloverKey", "L")); successfullySetup[0] = true; } catch { Game.LogTrivial($"[StopRightThere] [initialization] WARNING: Couldn't read PulloverKey"); }
                 try { Main.key2 = (Keys)kc.ConvertFromString(Reader.ReadString("Keybindings", "ModifierKey", "LControlKey")); successfullySetup[1] = true; } catch { Game.LogTrivial($"[StopRightThere] [initialization] WARNING: Couldn't read ModifierKey"); }
                 bool allOK = true;
                 foreach (bool ok in successfullySetup) { if (ok == false) allOK = false; }
@@ -56,13 +56,13 @@ namespace StopRightThere
                 Game.LogTrivial($"[StopRightThere] [initialization] WARNING: error MSG{e}");
                 settingsOK = false;
 
-                Main.key1 = Keys.P;
+                Main.key1 = Keys.L;
                 Main.key2 = Keys.LControlKey;
             }
 
             if (!settingsOK)
             {
-                if (successfullySetup[0] == false) Main.key1 = Keys.P; ;
+                if (successfullySetup[0] == false) Main.key1 = Keys.L; ;
                 if (successfullySetup[1] == false) Main.key2 = Keys.LControlKey;
             }
 
