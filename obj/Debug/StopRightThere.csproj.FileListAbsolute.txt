@@ -1,2 +1,0 @@
-C:\Users\John\Desktop\StopRightThere\StopRightThere\obj\Debug\StopRightThere.csproj.AssemblyReference.cache
-C:\Users\John\Desktop\StopRightThere\StopRightThere\obj\Debug\StopRightThere.csproj.CoreCompileInputs.cache
