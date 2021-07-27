@@ -67,8 +67,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helper.cs" />
+    <Compile Include="Initialization.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StopRightThere.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
