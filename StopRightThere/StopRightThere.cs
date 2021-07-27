@@ -18,16 +18,15 @@ namespace StopRightThere
                 {
                     try
                     {
-                        KeyboardState keyboard = new KeyboardState();
-                        if (keyboard.IsDown(Main.key1) && keyboard.IsDown(Main.key2) && Game.LocalPlayer.Character.IsInAnyPoliceVehicle && !Game.LocalPlayer.Character.IsPassenger) // both keys are pressed and plaayer is driving a police vehicle
+                        if (Game.IsKeyDownRightNow(Main.key1) && Game.IsKeyDownRightNow(Main.key2) && Game.LocalPlayer.Character.IsInAnyPoliceVehicle && !Game.LocalPlayer.Character.IsPassenger) // both keys are pressed and plaayer is driving a police vehicle
                         {
-                            Vector3 posAheadVeh = Game.LocalPlayer.Character.FrontPosition; // curent position of player, and therefore vehicle
+                            Vector3 posAheadVeh = Game.LocalPlayer.Character.CurrentVehicle.GetOffsetPosition(new Vector3(7f,0f,0f)); // curent position of player, and therefore vehicle
                             try
                             {
                                 Vehicle[] nearbyVehs = Game.LocalPlayer.Character.GetNearbyVehicles(6);
-                                float targetDist = new float(); // distance to target vehicle
-                                Vehicle targetVehicle = new Vehicle();
-                                foreach (Vehicle veh in nearbyVehs)
+                                float targetDist = 99.0f; // distance to target vehicle
+                                Vehicle targetVehicle = nearbyVehs[nearbyVehs.Length-1];    //so we take tha vehicle that is the farest vehicle. so it will get definetly changed by algorithm.
+                                foreach (Vehicle veh in nearbyVehs.Where(v => (v.Driver ? v.Driver != Game.LocalPlayer.Character : false )))
                                 {
                                     float tempDist = posAheadVeh.DistanceTo(veh.Position); // distance to current vehicle in list
                                     if (tempDist < targetDist)
@@ -36,12 +35,13 @@ namespace StopRightThere
                                         targetVehicle = veh; // set the new "close" vehicle as traffic stop target
                                     }
                                 }
-                                if (targetDist > 8.0f)
+                                if (targetDist > 15.0f)
                                 {
                                     Game.DisplayNotification("No nearby vehicle to pull over!");
                                     break;
                                 }
                                 Functions.StartPulloverOnParkedVehicle(targetVehicle, true, false); // TODO change to front of vehicle
+                                GameFiber.Sleep(1000);
                             }
                             catch (Exception e)
                             {
