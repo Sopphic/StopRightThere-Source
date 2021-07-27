@@ -3,6 +3,7 @@
 //+--------------------------------------------+
 
 using Rage;
+using LSPD_First_Response.Mod.API;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -35,6 +36,7 @@ namespace StopRightThere
         {
 
         }
+
         //This is called by Functions.OnOnDutyStateChanged as stated above, but only when bool OnDuty is true.
         private static void OnOnDutyStateChangedHandler(bool OnDuty)
         {
