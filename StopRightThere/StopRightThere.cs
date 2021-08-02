@@ -10,7 +10,7 @@ namespace StopRightThere
 {
     static class StopRightThere
     {
-        static internal void StopRightThere_Run()
+        internal static void StopRightThere_Run()
         {
             GameFiber.StartNew(delegate
             {
@@ -38,10 +38,14 @@ namespace StopRightThere
                                 if (targetDist > 15.0f)
                                 {
                                     Game.DisplayNotification("No nearby vehicle to pull over!");
-                                    break;
                                 }
-                                Functions.StartPulloverOnParkedVehicle(targetVehicle, true, false); // TODO change to front of vehicle
-                                GameFiber.Sleep(1000);
+                                else
+                                {
+                                    Game.LogTrivial("SRT: Attempting to start traffic stop");
+                                    Functions.StartPulloverOnParkedVehicle(targetVehicle, true,
+                                        false);
+                                    GameFiber.Sleep(1000);
+                                }
                             }
                             catch (Exception e)
                             {
@@ -59,7 +63,7 @@ namespace StopRightThere
 
         }
 
-        static internal void StopRightThere_Stop()
+        internal static void StopRightThere_Stop()
         {
             
         }
