@@ -43,17 +43,7 @@ namespace StopRightThere
                                 {
                                     Game.LogTrivial("SRT: Attempting to start traffic stop");
                                     Functions.StartPulloverOnParkedVehicle(targetVehicle, true, false);
-                                    Game.DisplayNotification(targetVehicle.Model.ToString() + "with plate" + targetVehicle.LicensePlate + "pulled over.");
-                                    targetVehicle.AttachBlip();
-                                    while (Functions.IsPlayerPerformingPullover())
-                                    {
-                                        GameFiber.Yield();
-                                    }
-                                    targetVehicle.GetAttachedBlip().Delete(); // when pullover ends, kill the blip
-                                    /* alternative:
-                                    GameFiber.SleepWhile(Functions.IsPlayerPerformingPullover());
-                                    targetVehicle.GetAttachedBlip().Delete(); // when pullover ends, kill the blip
-                                    */
+                                    Game.DisplayNotification(targetVehicle.Model.Name + " with plate " + targetVehicle.LicensePlate + " pulled over.");
                                 }
                             }
                             catch (Exception e)
