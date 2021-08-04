@@ -45,7 +45,15 @@ namespace StopRightThere
                                     Functions.StartPulloverOnParkedVehicle(targetVehicle, true, false);
                                     Game.DisplayNotification(targetVehicle.Model.ToString() + "with plate" + targetVehicle.LicensePlate + "pulled over.");
                                     targetVehicle.AttachBlip();
-                                    GameFiber.Sleep(1000);
+                                    while (Functions.IsPlayerPerformingPullover())
+                                    {
+                                        GameFiber.Yield();
+                                    }
+                                    targetVehicle.GetAttachedBlip().Delete(); // when pullover ends, kill the blip
+                                    /* alternative:
+                                    GameFiber.SleepWhile(Functions.IsPlayerPerformingPullover());
+                                    targetVehicle.GetAttachedBlip().Delete(); // when pullover ends, kill the blip
+                                    */
                                 }
                             }
                             catch (Exception e)
