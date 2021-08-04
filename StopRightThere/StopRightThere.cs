@@ -26,7 +26,7 @@ namespace StopRightThere
                                 Vehicle[] nearbyVehs = Game.LocalPlayer.Character.GetNearbyVehicles(6);
                                 float targetDist = 99.0f; // distance to target vehicle
                                 Vehicle targetVehicle = nearbyVehs[nearbyVehs.Length-1];    //so we take tha vehicle that is the farest vehicle. so it will get definetly changed by algorithm.
-                                foreach (Vehicle veh in nearbyVehs.Where(v => (v.Driver ? v.Driver != Game.LocalPlayer.Character : false )))
+                                foreach (Vehicle veh in nearbyVehs.Where(v => (v.Driver && v.Driver != Game.LocalPlayer.Character && !v.IsPoliceVehicle)))
                                 {
                                     float tempDist = posAheadVeh.DistanceTo(veh.Position); // distance to current vehicle in list
                                     if (tempDist < targetDist)
@@ -42,8 +42,9 @@ namespace StopRightThere
                                 else
                                 {
                                     Game.LogTrivial("SRT: Attempting to start traffic stop");
-                                    Functions.StartPulloverOnParkedVehicle(targetVehicle, true,
-                                        false);
+                                    Functions.StartPulloverOnParkedVehicle(targetVehicle, true, false);
+                                    Game.DisplayNotification(targetVehicle.Model.ToString() + "with plate" + targetVehicle.LicensePlate + "pulled over.");
+                                    targetVehicle.AttachBlip();
                                     GameFiber.Sleep(1000);
                                 }
                             }
