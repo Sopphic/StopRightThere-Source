@@ -18,7 +18,11 @@ namespace StopRightThere
                 {
                     try
                     {
-                        if (Game.IsKeyDownRightNow(Main.key1) && Game.IsKeyDownRightNow(Main.key2) && Game.LocalPlayer.Character.IsInAnyPoliceVehicle && !Game.LocalPlayer.Character.IsPassenger) // both keys are pressed and plaayer is driving a police vehicle
+                        if (Game.IsKeyDownRightNow(Main.key1) 
+                        && Game.IsKeyDownRightNow(Main.key2) 
+                        && Game.LocalPlayer.Character.IsInAnyPoliceVehicle 
+                        && !Game.LocalPlayer.Character.IsPassenger 
+                        && !LSPD_First_Response.Mod.API.Functions.IsPlayerPerformingPullover()) // both keys are pressed and plaayer is driving a police vehicle and is not performing already a pullover
                         {
                             Vector3 posAheadVeh = Game.LocalPlayer.Character.CurrentVehicle.GetOffsetPosition(new Vector3(7f,0f,0f)); // curent position of player, and therefore vehicle
                             try
@@ -43,7 +47,23 @@ namespace StopRightThere
                                 {
                                     Game.LogTrivial("SRT: Attempting to start traffic stop");
                                     Functions.StartPulloverOnParkedVehicle(targetVehicle, true, false);
-                                    Game.DisplayNotification(targetVehicle.Model.Name + " with plate " + targetVehicle.LicensePlate + " pulled over.");
+                                    Game.DisplayNotification(targetVehicle.Model.Name + " with plate " + targetVehicle.LicensePlate + " pulled over."); //Actually no need to. cause lspdfr is automaticaly copying the licenseplate to the policecomputer clipboard
+
+                                    Blip targetVehicleBlip = null;
+                                    try
+                                    {
+                                        //Adding blip
+                                        targetVehicleBlip = targetVehicle.AttachBlip(); //We need to remember the entity ID of that Blip because GetAttachedBlip() does not work properly
+                                        targetVehicleBlip.Color = System.Drawing.Color.Red;
+                                        targetVehicleBlip.Flash(340, 2000);
+
+                                        //Wait until Pullover has been finished
+                                        GameFiber.SleepUntil(() => LSPD_First_Response.Mod.API.Functions.IsPlayerPerformingPullover(), 0); //Another way to sleep the fiber
+                                    } finally   //the finally block ensures that even if a crash happens (for example with lspdfr) the finally-block will still delete the blip
+                                    {
+                                        //Finish Blip
+                                        if (targetVehicleBlip) targetVehicleBlip.Delete();  //Entitys can always get cleaned up. Make sure they exist before deleting.
+                                    }
                                 }
                             }
                             catch (Exception e)
@@ -64,7 +84,7 @@ namespace StopRightThere
 
         internal static void StopRightThere_Stop()
         {
-            
+
         }
     }
 }
